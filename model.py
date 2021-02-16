@@ -7,5 +7,11 @@ from torch.nn import CrossEntropyLoss
 #model = XLNetLMHeadModel.from_pretrained('xlnet-base-cased') 
 
 
-class UDA()
+class UDA(XLNetPreTrainedModel):
+    def __init__(self, config):
+        super().__init__(config)
+        self.transformer = XLNetModel(config) 
+        self.lm_loss = nn.Linear(config.d_model, config.vocab_size, bias=True) 
+        self.init_weights() 
+    
 
